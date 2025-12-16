@@ -2,10 +2,11 @@
 import { Loader, Send } from "lucide-react";
 import { motion, MotionValue } from "motion/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { formatAiBase, InfoTextBase } from "@/lib/utils";
 import InfoText from "./InfoText";
+import useWindowWidth from "@/lib/hooks/useWindowWidth";
 
 export default function Textarea({
   translateY,
@@ -17,6 +18,7 @@ export default function Textarea({
 
   const [loading, setLoading] = useState({ start: false, done: false });
   const [flagPlus, setFlagPlus] = useState(false);
+  const media = useWindowWidth();
   const [infoNote, setInfoNote] = useState<InfoTextBase | undefined>(undefined);
   const patternDisabled = (loading.start && !loading.done) || notes.length == 0;
   const sendNotes = async () => {
@@ -30,6 +32,7 @@ export default function Textarea({
       setLoading({ start: false, done: true });
     }
   };
+
   return (
     <motion.section
       style={{ y: translateY }}
@@ -78,7 +81,7 @@ export default function Textarea({
         </button>
       </div>
 
-      {window.innerWidth >= 700 && (
+      {media >= 700 && (
         <div className="col-span-3">
           <h2 className="text-[36px] text-primary">
             {writehere.map((char, i) => (
