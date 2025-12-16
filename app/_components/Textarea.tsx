@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { formatAiBase, InfoTextBase } from "@/lib/utils";
 import InfoText from "./InfoText";
-import useWindowWidth from "@/lib/hooks/useWindowWidth";
 
 export default function Textarea({
   translateY,
@@ -15,10 +14,10 @@ export default function Textarea({
 }) {
   const writehere = `Write here`.split("");
   const [notes, setNotes] = useState("");
-
+  const [flagKill, setFlagKill] = useState(false);
   const [loading, setLoading] = useState({ start: false, done: false });
   const [flagPlus, setFlagPlus] = useState(false);
-  const media = useWindowWidth();
+
   const [infoNote, setInfoNote] = useState<InfoTextBase | undefined>(undefined);
   const patternDisabled = (loading.start && !loading.done) || notes.length == 0;
   const sendNotes = async () => {
@@ -32,7 +31,11 @@ export default function Textarea({
       setLoading({ start: false, done: true });
     }
   };
-
+  useEffect(() => {
+    if (window) {
+      window.innerWidth >= 700 && setFlagKill(true);
+    }
+  }, []);
   return (
     <motion.section
       style={{ y: translateY }}
@@ -81,7 +84,7 @@ export default function Textarea({
         </button>
       </div>
 
-      {media >= 700 && (
+      {flagKill && (
         <div className="col-span-3">
           <h2 className="text-[36px] text-primary">
             {writehere.map((char, i) => (
