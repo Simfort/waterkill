@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-//@ts-expect-error fail with import
+
 import "./globals.css";
 
 const InterFont = Inter({
