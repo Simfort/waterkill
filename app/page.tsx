@@ -1,65 +1,72 @@
+"use client";
 import Image from "next/image";
+import Button from "./_components/Button";
+import Textarea from "./_components/Textarea";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 
 export default function Home() {
+  const { scrollY } = useScroll();
+  const translateY = useTransform(scrollY, [0, 1], [200, 0]);
+  const translateY2 = useTransform(scrollY, [0, 1], [50, 0]);
+  const translateYSpring = useSpring(translateY, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+  const translateYSpring2 = useSpring(translateY2, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="grid grid-cols-12 max-md:grid-cols-6 ">
+      <motion.header
+        style={{ y: translateYSpring2 }}
+        className="col-span-12 h-[114px] max-md:h-[50px]  items-center grid grid-cols-subgrid">
+        <Button className="border border-primary text-primary col-start-10 max-md:col-span-2 max-md:col-start-5 ">
+          About
+        </Button>
+      </motion.header>
+      <motion.h2
+        style={{ y: translateYSpring2 }}
+        className="col-start-2 col-end-13 mt-[20px]  max-md:col-start-1 max-md:ml-[20px] text-[24px]">
+        <span className="text-primary">AI</span> text processing
+      </motion.h2>
+      <Textarea translateY={translateYSpring2} />
+      <motion.section
+        style={{ y: translateYSpring2 }}
+        className=" mt-[300px] gap-x-20 max-lg:flex max-lg:justify-center grid-cols-subgrid grid col-start-1 col-end-13">
+        <div className="col-start-6  flex flex-col gap-2 items-center col-span-2">
+          <h2 className=" text-[14px] text-center">
+            You can buy the{" "}
+            <span className="text-primary">plus AI access.</span>
+          </h2>
+          <Button className="bg-[#FF0000] text-white">Buy Plus +</Button>
+        </div>
+      </motion.section>
+      <motion.footer
+        style={{ y: translateYSpring }}
+        className="col-start-1 grid mt-[120px] grid-cols-subgrid col-end-13 h-[200px]">
+        <div className="col-start-2 col-end-12  text-[14px]">
+          <p className="text-[#878787]">
+            © 2025 Waterkill. All rights reserved.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+          <p>
+            <a className="text-[#0015FF]" href="#">
+              Privacy Policy
+            </a>{" "}
+            |{" "}
+            <a className="text-[#0015FF]" href="#">
+              Terms of Service
+            </a>{" "}
+            |
+            <a className="text-[#0015FF]" href="#">
+              Contact Us
+            </a>
+          </p>
+        </div>{" "}
+        <Button className="col-start-2 bg-[#4C00FF] text-white">About</Button>
+      </motion.footer>
     </div>
   );
 }

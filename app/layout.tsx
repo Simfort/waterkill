@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+//@ts-expect-error fail with import
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const InterFont = Inter({
+  weight: ["700"],
 });
 
 export const metadata: Metadata = {
@@ -24,10 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${InterFont.className} `}>
+        <div className="size-150 fixed -translate-x-27.5 top-0 bottom-0 left-0  rounded-full border -z-10 border-primary max-md:size-50"></div>
+        {children}{" "}
+        <div className="h-150 w-150 -z-10 fixed translate-x-27.5 top-[45%] bottom-0 right-0  rounded-full border border-primary max-md:size-50"></div>
       </body>
     </html>
   );
