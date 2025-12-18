@@ -1,6 +1,21 @@
-// components/YandexRTB.js
 "use client";
+
 import { useEffect } from "react";
+
+interface YaContext {
+  Context?: {
+    AdvManager?: {
+      render: (params: { blockId: string; renderTo: string }) => void;
+    };
+  };
+}
+
+declare global {
+  interface Window {
+    yaContextCb?: (() => void)[];
+    Ya?: YaContext;
+  }
+}
 
 const YandexRTB = ({
   blockId,
@@ -10,15 +25,29 @@ const YandexRTB = ({
   containerId: string;
 }) => {
   useEffect(() => {
-    if (typeof window.Ya?.Context?.AdvManager?.render === "function") {
-      window.yaContextCb.push(() => {
-        window.Ya.Context.AdvManager.render({
+    // 1. Проверка окружения (клиент/сервер)
+    if (typeof window === "undefined") return;
+
+    // 2. Проверка наличия Ya.Context.AdvManager.render
+    const isYaReady = (): boolean => {
+      return (
+        !!window.Ya &&
+        !!window.Ya.Context &&
+        !!window.Ya.Context.AdvManager &&
+        typeof window.Ya.Context.AdvManager.render === "function"
+      );
+    };
+
+    if (isYaReady()) {
+      // 3. Добавляем вызов рендера в очередь
+      window.yaContextCb?.push(() => {
+        window.Ya?.Context?.AdvManager?.render({
           blockId: blockId,
           renderTo: containerId,
         });
       });
     } else {
-      console.error("Яндекс RTB не загружен");
+      console.warn("Яндекс RTB не загружен. Проверьте подключение context.js");
     }
   }, [blockId, containerId]);
 
