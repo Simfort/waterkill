@@ -11,7 +11,8 @@ export default function InfoText({ info }: { info: InfoTextBase }) {
         Процентов воды в вашем тексте
       </div>
       <div className="flex gap-2">
-        <span className="text-red-500">New Text:</span> <p>{info.newText}</p>
+        <span className="text-red-500">Исправленный текст:</span>{" "}
+        <p>{info.newText}</p>
       </div>
     </div>
   );

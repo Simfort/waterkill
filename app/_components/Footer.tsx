@@ -16,22 +16,22 @@ export default function Footer() {
       style={{ y: translateYSpring }}
       className="col-start-1 grid mt-[120px] grid-cols-12 col-end-13 h-[200px]">
       <div className="col-start-2 col-end-12  text-[14px]">
-        <p className="text-[#878787]">© 2025 Waterkill. All rights reserved.</p>
+        <p className="text-[#878787]">© 2025 Waterkill.Все права защищены..</p>
         <p>
           <a className="text-[#0015FF]" href="#">
-            Privacy Policy
+            Политика конфиденциальности
           </a>{" "}
           |{" "}
           <a className="text-[#0015FF]" href="#">
-            Terms of Service
+            Условия обслуживания
           </a>{" "}
           |
           <a className="text-[#0015FF]" href="#">
-            Contact Us
+            Связаться с нами
           </a>
         </p>
       </div>{" "}
-      <Button className="col-start-2 bg-[#4C00FF] text-white">About</Button>
+      <Button className="col-start-2 bg-[#4C00FF] text-white">О нас</Button>
     </motion.footer>
   );
 }
