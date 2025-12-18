@@ -3,16 +3,13 @@ import Image from "next/image";
 import Button from "./_components/Button";
 import Textarea from "./_components/Textarea";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import Link from "next/link";
 
 export default function Home() {
   const { scrollY } = useScroll();
-  const translateY = useTransform(scrollY, [0, 1], [200, 0]);
+
   const translateY2 = useTransform(scrollY, [0, 1], [50, 0]);
-  const translateYSpring = useSpring(translateY, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+
   const translateYSpring2 = useSpring(translateY2, {
     stiffness: 100,
     damping: 30,
@@ -23,7 +20,7 @@ export default function Home() {
       <motion.header
         style={{ y: translateYSpring2 }}
         className="col-span-12 h-[114px] max-md:h-[50px]  items-center grid grid-cols-subgrid">
-        <Button className="border border-primary text-primary col-start-10 max-md:col-span-2 max-md:col-start-5 ">
+        <Button className="border-2 border-primary text-primary col-start-10 max-md:col-span-2 max-md:col-start-5 ">
           About
         </Button>
       </motion.header>
@@ -41,32 +38,15 @@ export default function Home() {
             You can buy the{" "}
             <span className="text-primary">plus AI access.</span>
           </h2>
-          <Button className="bg-[#FF0000] text-white">Buy Plus +</Button>
+
+          <Link
+            href={"/plus"}
+            className="w-full flex items-center justify-center transition-all text-[13px] cursor-pointer hover:opacity-60 h-10.5 rounded-[20px]  bg-[#FF0000] text-white">
+            {" "}
+            Buy Plus +
+          </Link>
         </div>
       </motion.section>
-      <motion.footer
-        style={{ y: translateYSpring }}
-        className="col-start-1 grid mt-[120px] grid-cols-subgrid col-end-13 h-[200px]">
-        <div className="col-start-2 col-end-12  text-[14px]">
-          <p className="text-[#878787]">
-            © 2025 Waterkill. All rights reserved.
-          </p>
-          <p>
-            <a className="text-[#0015FF]" href="#">
-              Privacy Policy
-            </a>{" "}
-            |{" "}
-            <a className="text-[#0015FF]" href="#">
-              Terms of Service
-            </a>{" "}
-            |
-            <a className="text-[#0015FF]" href="#">
-              Contact Us
-            </a>
-          </p>
-        </div>{" "}
-        <Button className="col-start-2 bg-[#4C00FF] text-white">About</Button>
-      </motion.footer>
     </div>
   );
 }

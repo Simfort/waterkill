@@ -2,10 +2,12 @@
 
 :root {
   --primary: #4c00ff;
+  --accent: #00000078;
 }
 
 @theme inline {
   --color-primary: var(--primary);
+  --color-accent:var(--accent)
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -14,6 +16,11 @@ body {
   max-width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
+  font-weight: bold;
   margin: 0;
   padding: 0;
+}
+
+button{
+  cursor: pointer;
 }

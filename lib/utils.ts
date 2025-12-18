@@ -11,3 +11,7 @@ export type InfoTextBase = {
   newText: string;
   water: string;
 };
+
+export function convertToSubcurrency(amount: number, factor = 100) {
+  return Math.round(amount * factor);
+}
