@@ -3,8 +3,6 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 import Footer from "./_components/Footer";
-import Script from "next/script";
-import YandexRTB from "./_components/YandexRTB";
 
 const InterFont = Inter({
   weight: ["400", "300", "500", "600", "700"],
@@ -37,6 +35,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://waterkill-vdob.vercel.app/",
   },
+  other: { telderi: "477a9495aafa14c90e3eab37a939a337" },
 };
 
 export default function RootLayout({
@@ -49,13 +48,9 @@ export default function RootLayout({
       <body className={`${InterFont.className} `}>
         <div className="size-150 fixed -translate-x-27.5 top-0 bottom-0 left-0  rounded-full border -z-10 border-primary max-md:size-50"></div>
         {children} <Footer />
-        <YandexRTB
-          blockId="R-A-18074649-1"
-          containerId="yandex_rtb_R-A-18074649-1"
-        />
         <div className="h-150 w-150 -z-10 fixed translate-x-27.5 top-[45%] bottom-0 right-0  rounded-full border border-primary max-md:size-50"></div>{" "}
-        <Script src="https://yandex.ru/ads/system/context.js" async></Script>
       </body>
     </html>
   );
 }
+<meta name="telderi" content="477a9495aafa14c90e3eab37a939a337" />;
