@@ -31,7 +31,9 @@ export default function Footer() {
           </a>
         </p>
       </div>{" "}
-      <Button className="col-start-2 bg-[#4C00FF] text-white">О нас</Button>
+      <Button className="col-start-2 col-span-2 bg-[#4C00FF] text-white">
+        О нас
+      </Button>
     </motion.footer>
   );
 }

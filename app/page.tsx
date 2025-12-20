@@ -15,9 +15,9 @@ export default function Home() {
         <span className="text-primary">AI</span> обработка текста
       </h2>
       <Textarea />
-      <div className="col-span-full flex-col items-center mt-[100px] flex justify-center">
+      <div className="col-span-full  flex-col items-center mt-[100px]  flex justify-center">
         <h2 className="text-primary">Возвращенный результат:</h2>
-        <ul className="flex list-disc font-normal flex-col pl-20">
+        <ul className="flex max-md:pl-10 list-disc font-normal flex-col pl-20">
           <li>Количество воды в тексте</li>
           <li>Новый исправленный текст</li>
         </ul>

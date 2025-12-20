@@ -28,24 +28,25 @@ export default function Textarea() {
     }
   }, []);
   return (
-    <section className=" mt-[100px] max-md:mt-[10px] gap-x-20 grid-cols-subgrid max-md:flex max-md:flex-col max-md:items-center grid col-start-1 col-end-13">
-      <div className="col-start-4 max-md:w-1/1 max-md:p-5 col-end-10 h-112.5 max-md:col-start-2 max-md:col-end-6">
+    <section
+      className="mt-[100px] max-md:mt-[10px] gap-x-20 grid grid-cols-subgrid col-start-1 col-span-full min-h-fit"
+      style={{ gridAutoRows: "auto" }}>
+      <div className="col-start-4 max-md:col-start-1 max-md:p-5 col-end-10 max-md:col-end-12 overflow-hidden">
         <label htmlFor="notes">
-          {" "}
           <textarea
             disabled={notes.length >= 5000}
             onChange={(e) => setNotes(e.target.value)}
             value={notes}
             name="notes"
             placeholder="Пиши текст..."
-            className=" rounded-t-[50px] w-1/1 h-1/2 resize-none mt-[200px] bg-[#f2efef] outline-0 p-10 "></textarea>
+            className="rounded-t-[50px] w-full min-h-[200px] max-h-[400px] resize-none mt-[200px] bg-[#f2efef] outline-0 p-10"></textarea>
         </label>
         {loading.start && !loading.done && (
           <Loader className="animate-spin text-white" />
         )}
         {!loading.start && loading.done && infoNote && (
           <InfoText info={infoNote} />
-        )}{" "}
+        )}
         <p
           className={`text-gray-400 text-end ${
             notes.length >= 5000 ? "text-red-400" : "text-gray-400"
@@ -58,15 +59,15 @@ export default function Textarea() {
         <button
           disabled={patternDisabled}
           onClick={sendNotes}
-          className={`w-1/1 h-[50px] transition-all  flex items-center justify-center  rounded-b-[50px] ${
+          className={`w-full h-[50px] transition-all flex items-center justify-center rounded-b-[50px] ${
             patternDisabled
               ? "bg-gray-500 opacity-50"
-              : " bg-primary cursor-pointer hover:opacity-50"
+              : "bg-primary cursor-pointer hover:opacity-50"
           }`}>
           {loading.start && !loading.done ? (
             <Loader className="animate-spin text-white" />
           ) : (
-            <Send className="text-white " />
+            <Send className="text-white" />
           )}
         </button>
       </div>
@@ -79,12 +80,9 @@ export default function Textarea() {
                 className="inline-block"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{
-                  type: "spring",
-                  delay: 0.1 * i,
-                }}
+                transition={{ type: "spring", delay: 0.1 * i }}
                 key={i}>
-                {char == " " ? "\u00A0" : char}
+                {char === " " ? "\u00A0" : char}
               </motion.span>
             ))}
           </h2>
